@@ -1,6 +1,5 @@
 package com.rocker
 
-import scala.io.StdIn.readLine
 import scala.util.{Try, Using}
 import scala.io.Source._
 import java.io.File
@@ -79,15 +78,5 @@ object Program {
       fileWordsCounted ++ (index.fileNames -- fileWordsCounted.map(_.fileName).toSet).map(FileWordsCount(_, 0))
 
     allFilesCounted.sortBy(_.percent)(Ordering[Int].reverse).take(top)
-  }
-
-  def iterate(index: Index): Unit = {
-    print(s"search> ")
-    val searchString = readLine()
-
-    countWordsInFiles(index, searchString)
-      .foreach(result => println(f"${result.fileName}: ${result.percent}%%"))
-
-    iterate(index)
   }
 }
